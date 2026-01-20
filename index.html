@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+<title>Intramurals Eligibility Checker</title>
+</head>
+<body>
+
+<h2>Intramurals Eligibility Checker</h2>
+
+<form action="/check" method="post">
+    <label>
+        <input type="checkbox" name="registration">
+        Confirmed Online Registration
+    </label><br><br>
+
+    <label>
+        <input type="checkbox" name="medical">
+        Confirmed Medical Clearance
+    </label><br><br>
+
+    <label>
+        Grade Level:
+        <input type="number" name="grade" required>
+    </label><br><br>
+
+    <label>
+        Section:
+        <input type="text" name="section" required>
+    </label><br><br>
+
+    <button type="submit">Check Eligibility</button>
+</form>
+
+</body>
+</html>
+
