@@ -2,39 +2,144 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
-    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-<title>Intramurals Eligibility Checker</title>
+    <title>Intramurals Eligibility Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Intramurals Eligibility Checker</h2>
+<div class="container">
+    <h2>Intramurals Eligibility</h2>
 
-<form action="/check" method="post">
-    <label>
-        <input type="checkbox" name="registration">
-        Confirmed Online Registration
-    </label><br><br>
+    <!-- Online Registration -->
+    <label>Registered Online?</label>
+    <select id="registered">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
 
-    <label>
-        <input type="checkbox" name="medical">
-        Confirmed Medical Clearance
-    </label><br><br>
+    <!-- Medical Clearance -->
+    <label>Medical Clearance?</label>
+    <select id="medical">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
 
-    <label>
-        Grade Level:
-        <input type="number" name="grade" required>
-    </label><br><br>
+    <!-- Grade Level -->
+    <label>Grade Level</label>
+    <select id="grade">
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
 
-    <label>
-        Section:
-        <input type="text" name="section" required>
-    </label><br><br>
+    <!-- Section -->
+    <label>Section</label>
+    <select id="section">
+        <option value="emerald">Emerald</option>
+        <option value="ruby">Ruby</option>
+        <option value="topaz">Topaz</option>
+        <option value="sapphire">Sapphire</option>
+    </select>
 
-    <button type="submit">Check Eligibility</button>
-</form>
+    <!-- Button -->
+    <button onclick="checkEligibility()">Check Eligibility</button>
+
+    <!-- Result Display -->
+    <div id="result"></div>
+</div>
+
+<script>
+    function checkEligibility() {
+        // Get input values
+        let registered = document.getElementById("registered").value;
+        let medical = document.getElementById("medical").value;
+        let grade = parseInt(document.getElementById("grade").value);
+        let section = document.getElementById("section").value;
+
+        let result = document.getElementById("result");
+
+        // Eligibility checking using if-else
+        if (registered === "no") {
+            result.innerHTML = " You must register online before joining.";
+        }
+        else if (medical === "no") {
+            result.innerHTML = " You must secure a medical clearance.";
+        }
+        else if (grade < 7 || grade > 10) {
+            result.innerHTML = " Only Grades 7 to 10 are allowed.";
+        }
+        else {
+            let team = "";
+
+            // Section → Team Mapping
+            if (section === "emerald") {
+                team = "Red Bulldogs";
+            }
+            else if (section === "ruby") {
+                team = "Yellow Tigers";
+            }
+            else if (section === "topaz") {
+                team = "Green Hornets";
+            }
+            else if (section === "sapphire") {
+                team = "Blue Bears";
+            }
+
+            result.innerHTML = `
+                Congratulations! You are eligible to join the Intramurals! <br>
+                Your team is: <strong>${team}</strong>
+            `;
+        }
+    }
+</script>
 
 </body>
 </html>
-
